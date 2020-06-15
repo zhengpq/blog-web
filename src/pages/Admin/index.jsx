@@ -31,6 +31,7 @@ const routes = [
 ]
 
 const Admin = props => {
+  const { dispatch } = props
   return (
     <Layout className={styles.layout}>
       <Sider trigger={null} collapsible>

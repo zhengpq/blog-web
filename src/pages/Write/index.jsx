@@ -6,10 +6,10 @@ import 'easymde/dist/easymde.min.css';
 import styles from './index.less';
 
 const { Header, Content } = Layout;
-const { TextArea } = Input;
 
 const Write = props => {
   const {
+    id,
     dispatch,
     title,
     tags,
@@ -19,9 +19,21 @@ const Write = props => {
     tagSelected,
   } = props;
 
+  console.log('paki7777', id)
+
   const [articleTitle, setTitle] = useState(title);
   const [articleTypeSelected, setType] = useState(typeSelected);
   const [articleContent, setContent] = useState(content);
+
+  // 离开页面的时候还原参数
+  useEffect(() => {
+    return function initArticle() {
+      console.log('paki000');
+      dispatch({
+        type: 'write/initArticle'
+      })
+    }
+  })
 
   const changeTitle = event => {
     const { value } = event.target;
@@ -38,14 +50,26 @@ const Write = props => {
   };
 
   const publish = () => {
-    dispatch({
-      type: 'write/publishArticle',
-      payload: {
-        title: articleTitle,
-        type: articleTypeSelected,
-        content: articleContent,
-      },
-    });
+    if (id !== null) {
+      dispatch({
+        type: 'write/updateArticle',
+        payload: {
+          id,
+          title: articleTitle,
+          type: articleTypeSelected,
+          content: articleContent,
+        },
+      })
+    } else {
+      dispatch({
+        type: 'write/publishArticle',
+        payload: {
+          title: articleTitle,
+          type: articleTypeSelected,
+          content: articleContent,
+        },
+      });
+    }
   };
 
   const saveDraft = () => {};
@@ -58,7 +82,7 @@ const Write = props => {
             保存为草稿
           </Button> */}
           <Button type="primary" onClick={publish}>
-            发布文章
+            {id === null ? '发布文章' : '更新文章'}
           </Button>
         </div>
       </Header>
@@ -102,7 +126,8 @@ const Write = props => {
 };
 
 export default connect(
-  ({ write: { title, types, content, typeSelected } }) => ({
+  ({ write: { id, title, types, content, typeSelected } }) => ({
+    id,
     title,
     types,
     content,

@@ -13,21 +13,43 @@ export default defineConfig({
     },
   },
   routes: [
-    { path: '/', component: '@/pages/index' },
+    {
+      path: '/',
+      redirect: '/home',
+    },
+    {
+      path: '/home',
+      component: '@/pages/index',
+      routes: [
+        {
+          path: '/home',
+          redirect: '/home/articles',
+        },
+        {
+          path: '/home/articles',
+          component: '@/components/front/Articles',
+        },
+        { path: '/article/:id', component: '@/components/front/Article' },
+      ],
+    },
     { path: '/admin/write', component: '@/pages/write' },
-    { path: '/admin', component: '@/pages/Admin', routes: [
-      {
-        path: '/admin',
-        redirect: '/admin/articles',
-      },
-      {
-        path: '/admin/articles',
-        component: '@/components/back/Articles',
-      },
-      {
-        path: '/admin/drafts',
-        component: '@/components/back/Drafts'
-      }
-    ] },
+    {
+      path: '/admin',
+      component: '@/pages/Admin',
+      routes: [
+        {
+          path: '/admin',
+          redirect: '/admin/articles',
+        },
+        {
+          path: '/admin/articles',
+          component: '@/components/back/Articles',
+        },
+        {
+          path: '/admin/drafts',
+          component: '@/components/back/Drafts',
+        },
+      ],
+    },
   ],
 });

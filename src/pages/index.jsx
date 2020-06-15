@@ -1,65 +1,54 @@
 import React, { useEffect } from 'react';
-import styles from './index.less';
+import { Layout } from 'antd';
 import { connect } from 'dva';
+import Card from '../components/front/Card';
+import Articles from '../components/front/Articles'
+import { history } from 'umi'
+import styles from './index.less';
+const { Header, Sider, Content } = Layout;
 
-const Users = props => {
-  const { dispatch, users } = props;
-  console.log(users)
+const App = props => {
+  const { dispatch, articles } = props;
+  console.log('paki', articles);
 
   useEffect(() => {
     dispatch({
-      type: 'users/getUsers',
-      callback(res) {
-        dispatch({
-          type: 'users/changeUserList',
-          payload: {
-            data: res
-          }
-        })
-      }
+      type: 'article/articles',
     });
   }, []);
 
-  const createArticle = () => {
-    dispatch(
-      {type: 'write/'}
-    )
-  }
+  // const showArticle = id => {
+  //   history.push(`/article/${id}`)
+  // };
+
+  // const articleList = () => {
+  //   return articles.map(item => (
+  //     <Card
+  //       article={item}
+  //       key={item.key}
+  //       onClick={() => {
+  //         showArticle(item.id);
+  //       }}
+  //     ></Card>
+  //   ));
+  // };
 
   return (
-    <div>
-      {users
-        ? users.map(item => {
-            return (
-              <div key={item.name}>
-                <span>{item.name} : </span>
-                <span>{item.age}</span>
-              </div>
-            );
-          })
-        : null}
-    </div>
+    <Layout className={styles.layout}>
+      <Header style={{ padding: 0 }} className={styles.header}></Header>
+      <Layout>
+        <Sider trigger={null} collapsible className={styles.sider}>
+          <div>jjjjj</div>
+        </Sider>
+        <Content className={styles.main}>
+          {/* <Articles articles={articles}></Articles> */}
+          {props.children}
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
-export default connect(({ users: {users} }) => ({
-  users
-}))(Users);
-// export default () => {
-//   const getUserData = () => {
-//     fetch('/api/user/1')
-//     .then(function(response) {
-//       response.json().then(body => {
-//         console.log('pakizheng', body)
-//       })
-//     })
-//     .then(function(myJson) {
-//       console.log(myJson);
-//     });
-//   }
-//   return (
-//     <div>
-//       <h1 className={styles.title}>Page index</h1>
-//     </div>
-//   );
-// }
+export default connect(({ article: { articles } }) => ({
+  articles,
+}))(App);

@@ -4,6 +4,7 @@ import { Table, Button } from 'antd';
 import styles from './index.less';
 
 const Articles = props => {
+  const { dispatch, articles, updateArticleList } = props;
   const columns = [
     {
       title: 'id',
@@ -55,7 +56,6 @@ const Articles = props => {
     },
   ];
 
-  const { dispatch, articles, updateArticleList } = props;
   useEffect(() => {
     dispatch({
       type: 'admin/articles',
@@ -76,7 +76,7 @@ const Articles = props => {
   };
   const changeArticle = articleId => {
     dispatch({
-      type: '',
+      type: 'write/articleDetail',
       payload: {
         id: articleId
       }

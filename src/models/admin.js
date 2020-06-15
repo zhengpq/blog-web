@@ -11,7 +11,6 @@ export default {
   },
   effects: {
     *articles({payload, callback},{call, put}) {
-      console.log('pakizheng delete')
       const {status, data} = yield call(articlesServer)
       if (status === 200) {
         yield put({
