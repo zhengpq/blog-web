@@ -30,6 +30,7 @@ export default {
     },
     *articleDetail({ payload, callback }, { call, put }) {
       const res = yield call(articleService, payload.id);
+      console.log('pakizheng', res)
       const { status, data } = res;
       if (status === 200) {
         yield put({

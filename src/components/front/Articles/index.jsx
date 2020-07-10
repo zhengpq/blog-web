@@ -10,6 +10,7 @@ const Articles = props => {
     dispatch({type: 'article/initArticle'})
   })
   const showArticle = id => {
+    console.log('paki11');
     history.push(`/article/${id}`);
   };
 

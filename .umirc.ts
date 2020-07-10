@@ -29,9 +29,9 @@ export default defineConfig({
           path: '/home/articles',
           component: '@/components/front/Articles',
         },
-        { path: '/article/:id', component: '@/components/front/Article' },
       ],
     },
+    { path: '/article/:id', component: '@/components/front/Article' },
     { path: '/admin/write', component: '@/pages/write' },
     {
       path: '/admin',

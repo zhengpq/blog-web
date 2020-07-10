@@ -30,7 +30,7 @@ const Article = props => {
     <div>
       <div className={styles.title}>{title}</div>
       <div className={styles.content}>
-        <ReactMarkdown source={content}></ReactMarkdown>
+        <ReactMarkdown source={content} plugins={[require('remark-breaks')]}></ReactMarkdown>
       </div>
     </div>
   )
