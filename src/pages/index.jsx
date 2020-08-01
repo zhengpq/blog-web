@@ -15,6 +15,7 @@ const App = props => {
     dispatch({
       type: 'article/articles',
     });
+    history.push('/articles')
   }, []);
 
   // const showArticle = id => {
