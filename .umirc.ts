@@ -14,17 +14,25 @@ export default defineConfig({
     {
       path: '/',
       exact: true,
+      redirect: '/front'
+    },
+    {
+      path: '/front',
       component: '@/pages/index',
       routes: [
         {
-          path: '/articles',
-          component: '@/components/front/Articles',
-          exact: true,
+          path: '/front',
+          redirect: 'articles',
         },
         {
-          path: '/article/:id',
-          exact: true,
+          path: 'articles',
+          component: '@/components/front/Articles',
+          exact: true
+        },
+        {
+          path: 'article/:id',
           component: '@/components/front/Article',
+          exact: true
         },
       ],
     },
@@ -32,20 +40,18 @@ export default defineConfig({
     {
       path: '/admin',
       component: '@/pages/Admin',
-      exact: true,
       routes: [
         {
           path: '/admin',
-          redirect: '/admin/articles',
-          exact: true,
+          redirect: 'articles',
         },
         {
-          path: '/admin/articles',
+          path: 'articles',
           component: '@/components/back/Articles',
           exact: true,
         },
         {
-          path: '/admin/drafts',
+          path: 'drafts',
           component: '@/components/back/Drafts',
           exact: true,
         },

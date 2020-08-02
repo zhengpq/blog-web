@@ -32,6 +32,7 @@ const routes = [
 
 const Admin = props => {
   const { dispatch } = props
+  console.log('pakihh', props.children, props.route);
   return (
     <Layout className={styles.layout}>
       <Sider trigger={null} collapsible>

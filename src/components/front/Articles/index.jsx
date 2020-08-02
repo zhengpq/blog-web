@@ -5,13 +5,14 @@ import { connect } from 'dva';
 
 const Articles = props => {
   const { dispatch, articles } = props;
+  console.log('paki articles', articles);
 
   useEffect(() => {
     dispatch({type: 'article/initArticle'})
   })
   const showArticle = id => {
     console.log('paki11');
-    history.push(`/article/${id}`);
+    history.push(`/front/article/${id}`);
   };
 
   const articleList = () => {

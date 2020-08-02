@@ -27,13 +27,13 @@ const Write = props => {
 
   // 离开页面的时候还原参数
   useEffect(() => {
-    return function initArticle() {
-      console.log('paki000');
+    return () => {
+      console.log('paki ccc');
       dispatch({
         type: 'write/initArticle'
       })
     }
-  })
+  }, [])
 
   const changeTitle = event => {
     const { value } = event.target;
